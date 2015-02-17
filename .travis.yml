@@ -4,5 +4,11 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - python manage.py syncdb --noinput
+  - python manage.py migrate course
+  - python manage.py migrate
+  - mkdir course/fixtures
+  - cp doc/initial_data.json course/fixtures/
+  - python manage.py migrate course
 # command to run tests
 script: python manage.py test
